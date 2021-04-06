@@ -58,10 +58,10 @@ namespace PWSG_LAB5
             {
                 rowLabels[tile.Y].Text = CheckRow(tile.Y);
                 colLabels[tile.X].Text = CheckCol(tile.X);
-            }    
-            //Debug.WriteLine(this.State);
-            //Debug.WriteLine("rowstates: " + String.Join(",",this.rowStates));
-            //Debug.WriteLine("colstates: " + String.Join(",",this.colStates));
+            }
+            Debug.WriteLine(this.State);
+            Debug.WriteLine("rowstates: " + String.Join(",", this.rowStates));
+            Debug.WriteLine("colstates: " + String.Join(",", this.colStates));
         }
 
 
@@ -110,12 +110,28 @@ namespace PWSG_LAB5
             SaveFileDialog saveFileDialog = new();
 
             saveFileDialog.Filter = "JSON files (*.json)|*.json|All files (*.*)|*.*";
-            saveFileDialog.FilterIndex = 2;
             
             if(saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 Puzzle.SavePuzzle(Path.GetFullPath(saveFileDialog.FileName), puzzle);
             }
+        }
+
+        private void LoadPuzzleMenuItem_Click(object sender, EventArgs e)
+        {
+            //https://docs.microsoft.com/pl-pl/dotnet/api/system.windows.forms.openfiledialog?view=net-5.0
+            using (OpenFileDialog openFileDialog = new())
+            {
+                openFileDialog.Filter = "JSON files (*.json)|*.json|All files (*.*)|*.*";
+                openFileDialog.RestoreDirectory = true;
+
+                if(openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    this.LoadPuzzle(Puzzle.LoadPuzzle(Path.GetFullPath(openFileDialog.FileName)));
+                }
+
+            }
+
         }
     }
 }

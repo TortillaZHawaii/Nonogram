@@ -62,6 +62,8 @@ namespace PWSG_LAB5
             State = GameState.Running;
             this.SettingsGroupBox.Visible = false;
 
+            ClearControls();
+
             XSize = puzzle.Width;
             YSize = puzzle.Height;
             tiles = new GameTile[XSize, YSize];
@@ -74,6 +76,8 @@ namespace PWSG_LAB5
 
             GenerateTiles();
 
+            CreateLabels(Board.EmptyBoard(XSize, YSize));
+
             for(int x = 0; x < XSize; ++x)
             {
                 colLabels[x].Text = puzzle.ColLabels[x];
@@ -82,6 +86,8 @@ namespace PWSG_LAB5
             {
                 rowLabels[y].Text = puzzle.RowLabels[y];
             }
+
+            CheckBoard();
         }
 
         private void RecenterTableLayoutPanel(bool centered=true)
