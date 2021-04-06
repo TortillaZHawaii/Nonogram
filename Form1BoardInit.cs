@@ -15,8 +15,19 @@ namespace PWSG_LAB5
         /// </summary>
         /// <param name="width">Width of the board.</param>
         /// <param name="height">Height of the board.</param>
-        private void GenerateEmptyBoardOfSize(int width, int height, bool centered=true)
+        private void GenerateEmptyBoardOfSize(int width, int height, bool playable=true)
         {
+            if (!playable)
+            {
+                State = GameState.Creating;
+                this.SettingsGroupBox.Visible = true;
+            }
+            else
+            {
+                State = GameState.Running;
+                this.SettingsGroupBox.Visible = false;
+            }
+
             ClearControls();
             // initialising variables
             XSize = width;
@@ -27,13 +38,13 @@ namespace PWSG_LAB5
             rowStates = new bool[YSize];
             colStates = new bool[XSize];
 
-            RecenterTableLayoutPanel(centered);
+            RecenterTableLayoutPanel(playable);
 
             GenerateTiles();
 
         }
 
-        private Puzzle SavePuzzle(string title, string description)
+        private Puzzle GeneratePuzzle(string title, string description)
         {
             string[] rowStrLabels = new string[rowLabels.Length];
             string[] colStrLabels = new string[colLabels.Length];
@@ -48,6 +59,9 @@ namespace PWSG_LAB5
 
         private void LoadPuzzle(Puzzle puzzle)
         {
+            State = GameState.Running;
+            this.SettingsGroupBox.Visible = false;
+
             XSize = puzzle.Width;
             YSize = puzzle.Height;
             tiles = new GameTile[XSize, YSize];

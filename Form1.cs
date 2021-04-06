@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,7 +26,8 @@ namespace PWSG_LAB5
         public enum GameState
         {
             Running,
-            Finnished
+            Finnished,
+            Creating
         }
 
         public GameState State { get; private set; }
@@ -43,11 +45,20 @@ namespace PWSG_LAB5
         private void tile_MouseDown(object sender, MouseEventArgs me)
         {
             GameTile tile = (GameTile)sender;
-            if (me.Button == MouseButtons.Left)
-                tile.IsBlack = !tile.IsBlack;
-            else if (me.Button == MouseButtons.Right)
-                tile.IsCrossed = !tile.IsCrossed;
-            CheckMove(tile.X, tile.Y);
+            if (State != GameState.Finnished)
+            {
+                if (me.Button == MouseButtons.Left)
+                    tile.IsBlack = !tile.IsBlack;
+                else if (me.Button == MouseButtons.Right)
+                    tile.IsCrossed = !tile.IsCrossed;
+            }
+            if(State == GameState.Running)
+                CheckMove(tile.X, tile.Y);
+            if(State == GameState.Creating)
+            {
+                rowLabels[tile.Y].Text = CheckRow(tile.Y);
+                colLabels[tile.X].Text = CheckCol(tile.X);
+            }    
             //Debug.WriteLine(this.State);
             //Debug.WriteLine("rowstates: " + String.Join(",",this.rowStates));
             //Debug.WriteLine("colstates: " + String.Join(",",this.colStates));
@@ -88,6 +99,22 @@ namespace PWSG_LAB5
             if (result == DialogResult.OK)
             {
                 StartGameCreating(pickSizeDialog.GameWidth, pickSizeDialog.GameHeight);
+            }
+        }
+
+        private void SaveButton_Click(object sender, EventArgs e)
+        {
+            Puzzle puzzle = GeneratePuzzle(this.PuzzleTitleTextBox.Text, this.DifficultyTextBox.Text);
+
+            //https://docs.microsoft.com/pl-pl/dotnet/api/system.windows.forms.savefiledialog?view=net-5.0
+            SaveFileDialog saveFileDialog = new();
+
+            saveFileDialog.Filter = "JSON files (*.json)|*.json|All files (*.*)|*.*";
+            saveFileDialog.FilterIndex = 2;
+            
+            if(saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                Puzzle.SavePuzzle(Path.GetFullPath(saveFileDialog.FileName), puzzle);
             }
         }
     }
