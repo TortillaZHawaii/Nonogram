@@ -43,6 +43,7 @@ namespace PWSG_LAB5
             this.PuzzleTitleTextBox = new System.Windows.Forms.TextBox();
             this.DifficultyLabel = new System.Windows.Forms.Label();
             this.PuzzleTitleLabel = new System.Windows.Forms.Label();
+            this.CongratulationsLabel = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SettingsGroupBox.SuspendLayout();
             this.SuspendLayout();
@@ -77,10 +78,10 @@ namespace PWSG_LAB5
             // 
             // ChoosePuzzleMenuItem
             // 
-            this.ChoosePuzzleMenuItem.Enabled = false;
             this.ChoosePuzzleMenuItem.Name = "ChoosePuzzleMenuItem";
             this.ChoosePuzzleMenuItem.Size = new System.Drawing.Size(159, 22);
             this.ChoosePuzzleMenuItem.Text = "Choose puzzle...";
+            this.ChoosePuzzleMenuItem.Click += new System.EventHandler(this.ChoosePuzzleMenuItem_Click);
             // 
             // LoadPuzzleMenuItem
             // 
@@ -193,11 +194,27 @@ namespace PWSG_LAB5
             this.PuzzleTitleLabel.TabIndex = 0;
             this.PuzzleTitleLabel.Text = "Puzzle Title";
             // 
+            // CongratulationsLabel
+            // 
+            this.CongratulationsLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.CongratulationsLabel.AutoSize = true;
+            this.CongratulationsLabel.BackColor = System.Drawing.SystemColors.Control;
+            this.CongratulationsLabel.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.CongratulationsLabel.Location = new System.Drawing.Point(373, 709);
+            this.CongratulationsLabel.Name = "CongratulationsLabel";
+            this.CongratulationsLabel.Size = new System.Drawing.Size(233, 37);
+            this.CongratulationsLabel.TabIndex = 3;
+            this.CongratulationsLabel.Text = "Congratulations!";
+            this.CongratulationsLabel.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(980, 757);
+            this.Controls.Add(this.CongratulationsLabel);
             this.Controls.Add(this.SettingsGroupBox);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.menuStrip1);
@@ -233,6 +250,7 @@ namespace PWSG_LAB5
         private System.Windows.Forms.TextBox PuzzleTitleTextBox;
         private System.Windows.Forms.Label DifficultyLabel;
         private System.Windows.Forms.Label PuzzleTitleLabel;
+        private System.Windows.Forms.Label CongratulationsLabel;
     }
 }
 

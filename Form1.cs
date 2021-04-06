@@ -30,7 +30,18 @@ namespace PWSG_LAB5
             Creating
         }
 
-        public GameState State { get; private set; }
+        private GameState _state;
+        public GameState State 
+        { 
+            get => _state;
+            private set 
+            {
+                if (value == GameState.Finnished)
+                    CongratulationsLabel.Visible = true;
+                else CongratulationsLabel.Visible = false;
+                _state = value;
+            } 
+        }
 
         private bool[] rowStates;
         private bool[] colStates;
@@ -86,6 +97,8 @@ namespace PWSG_LAB5
 
         private void StartGameCreating(int width, int height)
         {
+            DifficultyTextBox.Text = "";
+            PuzzleTitleTextBox.Text = "";
             GenerateEmptyBoardOfSize(width, height, false);
             CreateLabels(Board.EmptyBoard(width, height));
         }
@@ -133,6 +146,18 @@ namespace PWSG_LAB5
             }
 
         }
+
+        private void ChoosePuzzleMenuItem_Click(object sender, EventArgs e)
+        {
+            PuzzleChooserForm puzzleChooserForm = new();
+            
+            if(puzzleChooserForm.ShowDialog() == DialogResult.OK)
+            {
+                this.LoadPuzzle(puzzleChooserForm.ChosenPuzzle);
+            }
+        }
+
+        
     }
 }
 

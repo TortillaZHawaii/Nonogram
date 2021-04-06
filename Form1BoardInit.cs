@@ -59,6 +59,9 @@ namespace PWSG_LAB5
 
         private void LoadPuzzle(Puzzle puzzle)
         {
+            if (puzzle == null)
+                return;
+
             State = GameState.Running;
             this.SettingsGroupBox.Visible = false;
 

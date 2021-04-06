@@ -33,7 +33,17 @@ namespace PWSG_LAB5
         {
             //https://docs.microsoft.com/pl-pl/dotnet/standard/serialization/system-text-json-how-to?pivots=dotnet-5-0
             string jsonString = File.ReadAllText(fileName);
-            return JsonSerializer.Deserialize<Puzzle>(jsonString);
+            try
+            {
+                Puzzle puzzle = JsonSerializer.Deserialize<Puzzle>(jsonString);
+                if (puzzle.Width == 0)
+                    return null;
+                return puzzle;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public static void SavePuzzle(string fileName, Puzzle puzzle)
