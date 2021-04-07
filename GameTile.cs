@@ -12,8 +12,6 @@ namespace PWSG_LAB5
     {
         private static Image CrossedOutImage = null;
 
-        private bool _isBlack;
-
         public int X
         {
             get;
@@ -26,14 +24,17 @@ namespace PWSG_LAB5
             private set;
         }
 
+        private bool _isBlack;
+
         public bool IsBlack { 
             get => _isBlack; 
             set
             {
                 _isBlack = value;
+                base.BackgroundImage = null;
+                _isCrossed = false;
                 if (value)
                 {
-                    _isCrossed = false;
                     BackColor = Color.Black;
                 }
                 else BackColor = Color.White;

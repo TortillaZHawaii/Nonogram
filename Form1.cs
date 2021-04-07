@@ -14,8 +14,19 @@ namespace PWSG_LAB5
 {
     public partial class Form1 : Form
     {
+        /// <summary>
+        /// Tile size in pixels
+        /// </summary>
         const int tileSize = 30;
+        
+        /// <summary>
+        /// Board width
+        /// </summary>
         public int XSize { get; private set; }
+
+        /// <summary>
+        /// Board height
+        /// </summary>
         public int YSize { get; private set; }
 
         private GameTile[,] tiles;

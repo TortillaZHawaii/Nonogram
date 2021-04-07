@@ -29,12 +29,15 @@ namespace PWSG_LAB5
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.widthTextBox = new System.Windows.Forms.TextBox();
             this.heightTextBox = new System.Windows.Forms.TextBox();
             this.widthLabel = new System.Windows.Forms.Label();
             this.heightLabel = new System.Windows.Forms.Label();
             this.okButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
+            this.PickErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.PickErrorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // widthTextBox
@@ -44,6 +47,7 @@ namespace PWSG_LAB5
             this.widthTextBox.Name = "widthTextBox";
             this.widthTextBox.Size = new System.Drawing.Size(100, 23);
             this.widthTextBox.TabIndex = 0;
+            this.widthTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.widthTextBox_Validating);
             // 
             // heightTextBox
             // 
@@ -52,6 +56,7 @@ namespace PWSG_LAB5
             this.heightTextBox.Name = "heightTextBox";
             this.heightTextBox.Size = new System.Drawing.Size(100, 23);
             this.heightTextBox.TabIndex = 1;
+            this.heightTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.heightTextBox_Validating);
             // 
             // widthLabel
             // 
@@ -90,11 +95,16 @@ namespace PWSG_LAB5
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
             // 
+            // PickErrorProvider
+            // 
+            this.PickErrorProvider.ContainerControl = this;
+            // 
             // PickSizeDialog
             // 
             this.AcceptButton = this.okButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.CancelButton = this.cancelButton;
             this.ClientSize = new System.Drawing.Size(258, 163);
             this.Controls.Add(this.cancelButton);
@@ -108,6 +118,7 @@ namespace PWSG_LAB5
             this.Name = "PickSizeDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Pick Size";
+            ((System.ComponentModel.ISupportInitialize)(this.PickErrorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -121,5 +132,6 @@ namespace PWSG_LAB5
         private System.Windows.Forms.Label heightLabel;
         private System.Windows.Forms.Button okButton;
         private System.Windows.Forms.Button cancelButton;
+        private System.Windows.Forms.ErrorProvider PickErrorProvider;
     }
 }
