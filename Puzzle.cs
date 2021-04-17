@@ -36,7 +36,14 @@ namespace PWSG_LAB5
             try
             {
                 Puzzle puzzle = JsonSerializer.Deserialize<Puzzle>(jsonString);
-                if (puzzle.Width == 0)
+                // simple validation
+                if (puzzle.Width < 2 || puzzle.Height < 2 || puzzle.Width > 15 || puzzle.Height > 15)
+                    return null;
+                if (puzzle.RowLabels == null || puzzle.RowLabels.Length != puzzle.Height)
+                    return null;
+                if (puzzle.ColLabels == null || puzzle.ColLabels.Length != puzzle.Width)
+                    return null;
+                if (puzzle.Title == null || puzzle.Description == null)
                     return null;
                 return puzzle;
             }

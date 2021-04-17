@@ -151,7 +151,14 @@ namespace PWSG_LAB5
 
                 if(openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    this.LoadPuzzle(Puzzle.LoadPuzzle(Path.GetFullPath(openFileDialog.FileName)));
+                    Puzzle puzzle = Puzzle.LoadPuzzle(Path.GetFullPath(openFileDialog.FileName));
+                    if (puzzle is not null)
+                        this.LoadPuzzle(puzzle);
+                    else
+                    {
+                        //https://docs.microsoft.com/pl-pl/dotnet/api/system.windows.forms.messagebox?view=net-5.0
+                        MessageBox.Show("Incorrect .json file!", "Error detected in file", MessageBoxButtons.OK);
+                    }
                 }
 
             }
